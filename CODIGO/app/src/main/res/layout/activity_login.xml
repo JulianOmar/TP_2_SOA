@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LoginActivity">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="235dp"
+        android:layout_height="68dp"
+        android:text="@string/app_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="102dp"
+        tools:textSize="@dimen/textSize" />
+
+    <EditText
+        android:id="@+id/editTextEmailAddress"
+        android:layout_width="@dimen/campo_central"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/edit_mail"
+        android:inputType="textEmailAddress"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="287dp"
+        tools:textSize="@dimen/textEditSize" />
+
+    <EditText
+        android:id="@+id/editTextPassword"
+        android:layout_width="@dimen/campo_central"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/edit_password"
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="375dp"
+        tools:textSize="@dimen/textEditSize" />
+
+    <Button
+        android:id="@+id/btnLogin"
+        android:layout_width="181dp"
+        android:layout_height="53dp"
+        android:onClick="onClickLogin"
+        android:text="@string/button_login"
+        app:layout_constraintBottom_toBottomOf="parent"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.664"
+        tools:textSize="@dimen/textButtonSize" />
+
+    <Button
+        android:id="@+id/btnRegister"
+        android:layout_width="183dp"
+        android:layout_height="55dp"
+        android:onClick="onClickRegister"
+        android:text="@string/button_register"
+        app:layout_constraintBottom_toBottomOf="parent"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.783"
+        tools:textSize="@dimen/textButtonSize" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

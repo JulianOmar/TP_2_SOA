@@ -1,0 +1,64 @@
+<resources>
+    <string name="app_name">Covid app</string>
+
+    <string name="edit_mail">Correo electrónico</string>
+    <string name="edit_password">Contraseña</string>
+    <string name="button_login">Iniciar Sesión</string>
+    <string name="button_register">Registrarse</string>
+    <string name="button_accept">Aceptar</string>
+    <string name="button_cancel">Cancelar</string>
+    <string name="tag_form">Registrarse</string>
+    <string name="textAutoDiagnosis">Auto Diagnostic</string>
+
+
+    <string name="textQuery00">¿Presentó pérdida del gusto y/o disminución del gusto de manera repentina?</string>
+    <string name="textQuery01">¿Estuvo a menos de dos metros por más de 15 minutos, con alguna persona que tenga diagnóstico confirmado/sospechoso de covid, desde las 48 hs. previas al inicio de los síntomas del mismo?</string>
+    <string name="textQuery02">¿Reside y/o trabaja en geriátrico, cárcel, hogar de niñas/os o neuropsiquiátricos?
+¿Trabaja en salud o es personal esencial?
+¿Vive en un barrio popular y/o pertenece a pueblos originarios?</string>
+    <string name="textQuery03">¿Tiene uno o más de estos síntomas?</string>
+    <string name="textChoice00">Temperatura de 37,5°C</string>
+    <string name="textChoice01">Tos o Dolor de garganta</string>
+    <string name="textChoice02">Agitación o sensación de falta de aire</string>
+    <string name="textChoice03">Pérdida de olfato</string>
+    <string name="textChoice04">Disminución del gusto</string>
+    <string name="textChoice05">Diarrea</string>
+    <string name="textChoice06">Dolor de cabeza o musculares</string>
+
+    <string name="textQuery04">¿Ha viajado al exterior en los últimos 10 días?</string>
+    <string name="textPollMessage">Continuemos cuidándonos, manteniendo la distancia física, lavándonos las manos y cumpliendo las medidas vigentes.</string>
+
+    <string name="buttonCancelForm">Cancelar</string>
+
+    <!---activity_register-->
+    <string name="edit_register_name">Nombre</string>
+    <string name="edit_register_lastname">Apellido</string>
+    <string name="edit_register_dni">DNI</string>
+    <string name="edit_register_commission">Comisión</string>
+    <string name="edit_register_group">Grupo</string>
+
+    <!---activity_register-->
+    <string name="button_send">ENVIAR</string>
+    <string name="tag_telephone_number">Ingrese un número de telefono</string>
+    <string name="edit_telephone_number">Número de télefono celular</string>
+    <string name="tag_auth_code">Ingrese codigo</string>
+    <string name="button_auth_resend_code">Reenviar codigo</string>
+    <string name="edit_auth_code">codigo</string>
+    <string name="button_menu_physical_state">Estado física</string>
+    <string name="button_menu_auto_test">Auto diagnostoco</string>
+    <string name="button_menu_logout">Cerrar Sesión</string>
+
+    <string name="alertCovid">Usted podría ser un caso confirmado por criterio clínico-epidemiológico.
+Debe permanecer en su casa, en una habitación sólo para usted. La habitación debe estar con la puerta cerrada. Puede salir solo al baño, con el barbijo y después limpiar el baño.
+Reforzar la limpieza de las superficies y el lavado de manos de todos los convivientes, con agua y jabón es suficiente. Ventilar la casa. Si necesita que le alcancen algo, en lo posible que lo haga la misma persona y que sea una persona joven y sana.
+Si tiene Obra Social comuníquese, de lo contrario será contactado desde el Ministerio de Salud PBA para ser evaluado.
+Sus convivientes y las personas que estuvieron en contacto con usted (a menos de 2 mts por más de 15 min) las 48 hs previas al inicio de síntomas deberán aislarse durante 10 días. Si alguno de ellos presenta algunos de los síntomas nombrados que llame a su OOSS y sino al 148. Le pido que les comunique eso.
+Debe activar el sistema de emergencias, llamando al 107 o al número de emergencias de su OOSS: si tiene dificultad respiratoria mayor como por ej. Palabra entrecortada o respira rápido y fuerte en reposo, cambio de color de piel (azulada), sensación de ahogo.</string>
+    <string name="etiq_steps">Cantidad de Pasos realizado</string>
+    <string name="etiq_speed">Velocidad</string>
+    <string name="etiq_active_time">Tiempo Activo</string>
+    <string name="etiq_distance">Distancia</string>
+    <string name="button_reset">Reiniciar</string>
+    <string name="button_back">Volver</string>
+    <string name="button_reset_counter">Reiniciar</string>
+</resources>

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="50dp"
+        android:text="@string/textAutoDiagnosis"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="85dp"
+        tools:textColor="@color/black"
+        tools:textSize="@dimen/textSize" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="344dp"
+        android:layout_height="33dp"
+        android:layout_marginStart="16dp"
+        android:text="@string/textQuery03"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="178dp"
+        tools:textColor="@color/black"
+        tools:textSize="@dimen/textFormSize" />
+
+    <CheckBox
+        android:id="@+id/checkBox00"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/textChoice00"
+        tools:layout_editor_absoluteX="28dp"
+        tools:layout_editor_absoluteY="227dp" />
+
+    <CheckBox
+        android:id="@+id/checkBox01"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/textChoice01"
+        tools:layout_editor_absoluteX="28dp"
+        tools:layout_editor_absoluteY="275dp" />
+
+    <CheckBox
+        android:id="@+id/checkBox02"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/textChoice02"
+        tools:layout_editor_absoluteX="28dp"
+        tools:layout_editor_absoluteY="323dp" />
+
+    <CheckBox
+        android:id="@+id/checkBox03"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/textChoice03"
+        tools:layout_editor_absoluteX="28dp"
+        tools:layout_editor_absoluteY="371dp" />
+
+    <CheckBox
+        android:id="@+id/checkBox04"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/textChoice04"
+        tools:layout_editor_absoluteX="28dp"
+        tools:layout_editor_absoluteY="419dp" />
+
+    <CheckBox
+        android:id="@+id/checkBox05"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/textChoice05"
+        tools:layout_editor_absoluteX="28dp"
+        tools:layout_editor_absoluteY="467dp" />
+
+    <CheckBox
+        android:id="@+id/checkBox06"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/textChoice06"
+        tools:layout_editor_absoluteX="28dp"
+        tools:layout_editor_absoluteY="515dp" />
+
+
+    <Button
+        android:id="@+id/btnCancelForm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/buttonCancelForm"
+        tools:layout_editor_absoluteX="53dp"
+        tools:layout_editor_absoluteY="628dp" />
+
+    <Button
+        android:id="@+id/btnAcceptForm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:onClick="onClickSend"
+        android:text="@string/button_accept"
+        app:layout_constraintBottom_toBottomOf="@+id/btnCancelForm"
+        tools:layout_editor_absoluteX="210dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
