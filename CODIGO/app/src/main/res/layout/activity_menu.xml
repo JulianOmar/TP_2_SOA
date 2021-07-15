@@ -6,6 +6,28 @@
     android:layout_height="match_parent"
     tools:context=".MenuActivity">
 
+
+    <TextView
+        android:id="@+id/etiqProximity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteY="47dp" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+
+        android:layout_height="145dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/ic_coronavirus"
+        tools:layout_editor_absoluteY="173dp" />
+
     <TextView
         android:id="@+id/etiqLocationMenu"
 
@@ -20,15 +42,6 @@
         app:layout_constraintVertical_bias="0.135"
         tools:textSize="@dimen/textSize" />
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/ic_launcher_foreground"
-        tools:layout_editor_absoluteY="162dp" />
 
     <Button
         android:id="@+id/btnPhysicalState"
@@ -39,6 +52,7 @@
         android:layout_marginTop="295dp"
         android:layout_marginEnd="159dp"
         android:layout_marginRight="159dp"
+
         android:layout_marginBottom="388dp"
         android:onClick="onClickPhysicalState"
         android:text="@string/button_menu_physical_state"

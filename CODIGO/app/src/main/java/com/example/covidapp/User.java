@@ -106,7 +106,6 @@ public class User {
                 connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
                 connection.setRequestProperty("Authorization", "Bearer " + token_refresh);
-                Log.i("debug666", "STRINGS 0 TIENE " + strings[0]);
                 connection.setDoOutput(true);
                 connection.setDoInput(true);
                 connection.setConnectTimeout(5000);
@@ -131,21 +130,31 @@ public class User {
                 result = answer.get("success").toString();
                 User.this.setToken(answer.get("token").toString());
                 User.this.setToken_refresh(answer.get("token_refresh").toString());
-
+                if (!result.matches("true")) {
+                    return false;
+                }
+                return true;
             } catch (JSONException | IOException e) {
                 e.printStackTrace();
             }
             return false;
         }
+
+        @Override
+        protected void onPostExecute(Boolean o) {
+            if (!o) {
+                Log.e("Error Token", "No se pudo refrescar el token");
+            }
+            Log.i("Token Server Response", "Me respondió: " + o.toString());
+        }
     }
 
     /**
-     * tike cada 30 minutos para comunicaión con el servodor
+     * tike cada 25 minutos para comunicaión con el servodor
      */
     private void setRepeatingAsyncTask() {
-
         final Handler handler = new Handler();
-        Timer timer = new Timer();
+        TimerTaskClass ttc = new TimerTaskClass();
         TimerTask task = new TimerTask() {
             @Override
             public void run() {
@@ -153,7 +162,7 @@ public class User {
                     public void run() {
                         try {
                             TokenTask tokenTask = new TokenTask();
-                            tokenTask.execute(getToken_refresh().toString());
+                            tokenTask.execute(getToken_refresh());
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -161,7 +170,7 @@ public class User {
                 });
             }
         };
-        timer.schedule(task, 0, 30 * 1000);
+        ttc.initTimer();
+        ttc.getInstance().getTimer().schedule(task, 0, 25 * 60 * 1000);
     }
-
 }

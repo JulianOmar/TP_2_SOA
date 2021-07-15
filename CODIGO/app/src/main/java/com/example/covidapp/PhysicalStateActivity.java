@@ -44,6 +44,9 @@ public class PhysicalStateActivity extends AppCompatActivity implements SensorEv
     private Integer previousSteps;
     private Integer actualSteps;
     private Double speed;
+    private String iSteps;
+    private String iTime;
+    private String iActive;
     boolean running = false;
 
     /**
@@ -55,28 +58,38 @@ public class PhysicalStateActivity extends AppCompatActivity implements SensorEv
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.i("AppInfo", "<<<<ON_CREATE PYSICAL_STATE_ACTIVITY>>>>");
         setContentView(R.layout.activity_physical_state);
-
-        Intent intent2 = getIntent();
-        Bundle extras = intent2.getExtras();
-
-        previousTime = System.currentTimeMillis();
-        initialTime = System.currentTimeMillis();
+        sp = this.getSharedPreferences(Utils.SP_STEP_TIME, Context.MODE_PRIVATE);
+        iSteps = sp.getString(PhysicalStateActivity.ACTUAL_STEPS, "-1");
+        iActive = sp.getString(PhysicalStateActivity.ACTIVE_TIME, "-1");
+        previousTime = java.lang.System.currentTimeMillis();
         previousSteps = 0;
-        actualSteps = 0;
+        speed = 0D;
         tvSteps = (TextView) findViewById(R.id.textViewSteps2);
         tvSpeed = (TextView) findViewById(R.id.textViewSpeed2);
         tvActiveTime = (TextView) findViewById(R.id.textViewActiveTime2);
         tvDistance = (TextView) findViewById(R.id.textViewDistance2);
-
-
-        tvSteps.setText("0");
-        tvActiveTime.setText("0s");
+        initialTime = java.lang.System.currentTimeMillis();
+        activeTime = 0L;
+        if ((!iSteps.matches("-1") && iSteps != null && !iSteps.matches(""))
+                && (!iActive.matches("-1") && iActive != null && !iActive.matches(""))) {
+            actualSteps = Integer.valueOf(iSteps);
+            auxTime = Long.valueOf(iActive);
+            tvSteps.setText(String.valueOf(actualSteps));
+            tvDistance.setText(String.valueOf(new DecimalFormat("#.##").format(actualSteps * 0.9)) + "m");
+            tvActiveTime.setText(auxTime.toString() + "s");
+        } else {
+            actualSteps = 0;
+            auxTime = 0L;
+            tvSteps.setText("0");
+            tvDistance.setText("0m");
+            tvActiveTime.setText("0s");
+        }
         tvSpeed.setText("0p/s");
-        tvDistance.setText("0m");
-
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-        Log.i("AppInfo", "<<<<ON_CREATE PHYSICAL_STATE_ACTIVITY>>>>");
+        alertDialog = new AlertDialog.Builder(PhysicalStateActivity.this).create();
+
     }
 
 
@@ -88,6 +101,7 @@ public class PhysicalStateActivity extends AppCompatActivity implements SensorEv
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        alertDialog.dismiss();
     }
 
     @Override
@@ -104,9 +118,28 @@ public class PhysicalStateActivity extends AppCompatActivity implements SensorEv
     }
 
     @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(PhysicalStateActivity.this, MenuActivity.class);
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putString(PhysicalStateActivity.ACTUAL_STEPS, actualSteps.toString());
+        if (activeTime != null) {
+            editor.putString(PhysicalStateActivity.ACTIVE_TIME, activeTime.toString());
+        }
+        editor.commit();
+        startActivity(intent);
+        finish();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.i("AppInfo", "<<<<ON_START PYSICAL_STATE_ACTIVITY>>>>");
+    }
+    @Override
     protected void onResume() {
         super.onResume();
-        previousTime = System.currentTimeMillis();
+        Log.i("AppInfo", "<<<<ON_RESUME PYSICAL_STATE_ACTIVITY>>>>");
+        previousTime = java.lang.System.currentTimeMillis();
         running = true;
         Sensor stepSensor = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_DETECTOR);
         if (stepSensor != null) {
@@ -115,6 +148,8 @@ public class PhysicalStateActivity extends AppCompatActivity implements SensorEv
             Toast.makeText(this, "Sensor no encontrado!", Toast.LENGTH_SHORT).show();
         }
     }
+
+
 
     /**
      * Se detectan los pasos registrados por el usuario
@@ -132,7 +167,8 @@ public class PhysicalStateActivity extends AppCompatActivity implements SensorEv
                     tvDistance.setText(String.valueOf(new DecimalFormat("#.##").format(actualSteps * 0.9)) + "m");
                     actualTime = java.lang.System.currentTimeMillis();
                     seconds = (actualTime - previousTime) / 1000;
-                    tvActiveTime.setText(String.valueOf((actualTime - initialTime) / 1000) + "s");
+                    activeTime = (actualTime - initialTime) / 1000 + auxTime;
+                    tvActiveTime.setText(String.valueOf(activeTime) + "s");
                     if (seconds >= 5) {
                         speed = (double) (actualSteps - previousSteps) / seconds;
                         tvSpeed.setText(String.valueOf(new DecimalFormat("#.##").format(speed) + "p/s"));
@@ -140,7 +176,7 @@ public class PhysicalStateActivity extends AppCompatActivity implements SensorEv
                         previousSteps = actualSteps;
                     }
                     if (speed >= 2 && !alertDialog.isShowing() && !(PhysicalStateActivity.this).isFinishing()) {
-                        setAlertText("¡Atención!", "¡permanesca en reposo!");
+                        setAlertText("¡Atención!", "¡Debe hacer reposo, no corra!");
                     }
                 }
                 break;

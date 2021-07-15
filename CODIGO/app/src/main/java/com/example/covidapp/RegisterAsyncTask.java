@@ -29,7 +29,14 @@ public class RegisterAsyncTask extends AsyncTask<String, Void, Boolean> {
     }
 
     /**
-     * Comunicación con el servidor
+     * Comunicación con el servidorSe envia:
+     * -   nombre
+     * -   apellido
+     * -   dni
+     * -   email
+     * -   contraseña   DEBEN SER 8 CARACTERES COMO MINIMO
+     * -   comision     3900 (MIERCOLES)
+     * -   grupo
      *
      * @param strings
      * @return
@@ -64,7 +71,6 @@ public class RegisterAsyncTask extends AsyncTask<String, Void, Boolean> {
 
             DataOutputStream dataOutputStream = new DataOutputStream(connection.getOutputStream());
             dataOutputStream.write(object.toString().getBytes("UTF-8"));
-            Log.i("debug104", "Datos enviados al servidor " + object.toString());
 
             dataOutputStream.flush();
             connection.connect();
@@ -125,11 +131,12 @@ public class RegisterAsyncTask extends AsyncTask<String, Void, Boolean> {
             this.registerActivity.runingActivity();
         } else {
             if (!registerSucces && internetConnection) {
-                this.registerActivity.setAlertText("Error de Registro!", "Error al registrar, intente nuevamente.");
+                this.registerActivity.setAlertText("Error de Registro!", serverResponse);
             }
             if (!internetConnection) {
                 this.registerActivity.setAlertText("Error de conexion!", "Debe conectarse a internet e intentar nuevamente");
             }
+            this.registerActivity.progressBar.setVisibility(View.INVISIBLE);
             this.registerActivity.btnAccept.setEnabled(true);
             this.registerActivity.btnCancel.setEnabled(true);
         }

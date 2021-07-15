@@ -40,6 +40,7 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+        Log.i("AppInfo", "<<<<ON_CREATE REGISTERA_ACTIVITY>>>>");
         setContentView(R.layout.activity_register);
         btnAccept = (Button) findViewById(R.id.btnAccept);
         btnCancel = (Button) findViewById(R.id.btnCancel);
@@ -79,9 +80,22 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        Log.i("AppInfo", "<<<<ON_START REGISTERA_ACTIVITY>>>>");
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
         Log.i("AppInfo", "<<<<ON_RESUME REGISTERA_ACTIVITY>>>>");
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     /**
@@ -137,7 +151,7 @@ public class RegisterActivity extends AppCompatActivity {
         } else if (passwordOrigin.getText().toString().length() < 8) {
             setAlertText("Error de Registro!", "Debe ingresar una contraseña de 8 caracteres o más.");
             return false;
-        } else if (dniOrigin.getText().toString().length() < 7) {
+        } else if (dniOrigin.getText().toString().length() < 7 || dniOrigin.getText().toString().length() > 8) {
             setAlertText("Error de Registro!", "Debe ingresar un DNI valido.");
             return false;
         }

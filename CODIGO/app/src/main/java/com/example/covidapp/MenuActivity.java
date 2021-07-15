@@ -9,20 +9,30 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 
-
 public class MenuActivity extends AppCompatActivity implements SensorEventListener {
 
-    SensorManager sensorManager;
+    public SensorManager sensorManager;
+    private TextView etiqLocation;
+    private TextView etiqProximity;
     private AlertDialog alertDialog;
     private SharedPreferences sp;
+    private SharedPreferences spProximity;
+    public Double lat = 1.0;
+    public Double lon = 1.0;
+    private String iSteps;
+    private String iTime;
+    private LocationManager manager;
+    private AlertDialog alert;
     private boolean closeDistance;
 
     public boolean isCloseDistance() {
@@ -32,9 +42,23 @@ public class MenuActivity extends AppCompatActivity implements SensorEventListen
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.i("AppInfo", "<<<<ON_CREATE MENU_ACTIVITY>>>>");
         setContentView(R.layout.activity_menu);
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        etiqLocation = (TextView) findViewById(R.id.etiqLocationMenu);
+        etiqProximity = (TextView) findViewById(R.id.etiqProximity);
         alertDialog = new AlertDialog.Builder(MenuActivity.this).create();
+        sp = this.getSharedPreferences("UserLocation", Context.MODE_PRIVATE);
+        spProximity = this.getSharedPreferences(Utils.PROXIMITY_SENSOR, Context.MODE_PRIVATE);
+        String proximitySP = spProximity.getString("Proximity", null);
+        if (proximitySP != null) {
+            etiqProximity.setText("Sensor Proximidad: " + proximitySP);
+            if (etiqProximity.getVisibility() == View.GONE) {
+                etiqProximity.setVisibility(View.VISIBLE);
+            }
+        } else {
+            etiqProximity.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -58,8 +82,15 @@ public class MenuActivity extends AppCompatActivity implements SensorEventListen
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        Log.i("AppInfo", "<<<<ON_START MENU_ACTIVITY>>>>");
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
+        Log.i("AppInfo", "<<<<ON_RESUME MENU_ACTIVITY>>>>");
         Sensor proximitySensor = sensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY);
         if (proximitySensor != null) {
             sensorManager.registerListener(this, proximitySensor, SensorManager.SENSOR_DELAY_UI);
@@ -113,6 +144,11 @@ public class MenuActivity extends AppCompatActivity implements SensorEventListen
                 editor.putString("Proximity", proximitySP);
                 Log.i("AppInfo", "<<<<PROXIMITY SENSOR: " + proximitySP + ">>>>");
                 editor.commit();
+                etiqProximity.setText("Sensor Proximidad: " + proximitySP);
+                if (etiqProximity.getVisibility() == View.GONE) {
+                    etiqProximity.setVisibility(View.VISIBLE);
+                }
+
                 if (event.values[0] < event.sensor.getMaximumRange()) {
                     this.closeDistance = true;
                     new DistanceSensorAsyncTask(MenuActivity.this).execute();

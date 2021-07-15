@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -23,10 +24,10 @@ public class LoginActivity extends AppCompatActivity {
     public Button btnLogin;
     public EditText loginEmail;
     public EditText loginPassword;
+    public ProgressBar progressBar;
     private SharedPreferences sp;
     private String userEmail;
     private String userToken;
-
     private AlertDialog alertDialog;
 
     /**
@@ -38,11 +39,13 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.i("AppInfo", "<<<<ON_CREATE LOGIN_ACTIVITY>>>>");
         setContentView(R.layout.activity_login);
         btnRegister = (Button) findViewById(R.id.btnRegister);
         btnLogin = (Button) findViewById(R.id.btnLogin);
-        loginEmail = (EditText) findViewById(R.id.editTextEmailAddress);
-        loginPassword = (EditText) findViewById(R.id.editTextPassword);
+        loginEmail = (EditText) findViewById(R.id.editTextloginEmailAddress);
+        loginPassword = (EditText) findViewById(R.id.editTextloginPassword);
+        progressBar = (ProgressBar) findViewById(R.id.progressBar);
         alertDialog = new AlertDialog.Builder(LoginActivity.this).create();
         sp = this.getSharedPreferences(Utils.SP_STEP_TIME, Context.MODE_PRIVATE);
     }
@@ -105,7 +108,7 @@ public class LoginActivity extends AppCompatActivity {
      *
      * @param strings
      */
-    public void runingActivity(String... strings) {
+    public void lanzarActivity(String... strings) {
         Intent intent = new Intent(LoginActivity.this, MenuActivity.class);
         userEmail = strings[0];
         userToken = strings[2];

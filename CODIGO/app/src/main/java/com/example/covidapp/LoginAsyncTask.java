@@ -1,7 +1,6 @@
 package com.example.covidapp;
 
 import android.os.AsyncTask;
-import android.util.Log;
 import android.view.View;
 
 import org.json.JSONException;
@@ -19,6 +18,7 @@ public class LoginAsyncTask extends AsyncTask<String, Void, Boolean> {
     private User user;
     private Boolean loginSucces = false;
     private Boolean internetConnection = false;
+    private String serverResponse;
 
     public LoginAsyncTask(LoginActivity loginActivity) {
         this.loginActivity = loginActivity;
@@ -60,6 +60,7 @@ public class LoginAsyncTask extends AsyncTask<String, Void, Boolean> {
                 result = Utils.convertInputStreamToString(inputStreamReader).toString();
                 loginSucces = true;
             } else if (responseCode == HttpURLConnection.HTTP_BAD_REQUEST) {
+
                 InputStreamReader inputStreamReader = new InputStreamReader(connection.getErrorStream());
                 result = Utils.convertInputStreamToString(inputStreamReader).toString();
                 loginSucces = false;
@@ -74,16 +75,20 @@ public class LoginAsyncTask extends AsyncTask<String, Void, Boolean> {
         } catch (JSONException | IOException e) {
             e.printStackTrace();
         }
-        if (result.matches("true")) {
+        if (!result.matches("true")) {
             try {
-                user = new User(strings[0], strings[1], answer.get("token").toString(), answer.get("token_refresh").toString());
-                Log.i("debug166", user.toString());
+                serverResponse = answer.getString("msg");
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            return true;
+            return false;
         }
-        return false;
+        try {
+            user = new User(strings[0], strings[1], answer.get("token").toString(), answer.get("token_refresh").toString());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return true;
     }
 
     /**
@@ -91,6 +96,7 @@ public class LoginAsyncTask extends AsyncTask<String, Void, Boolean> {
      */
     @Override
     protected void onPreExecute() {
+        this.loginActivity.progressBar.setVisibility(View.VISIBLE);
         this.loginActivity.btnLogin.setEnabled(false);
         this.loginActivity.btnRegister.setEnabled(false);
     }
@@ -103,23 +109,29 @@ public class LoginAsyncTask extends AsyncTask<String, Void, Boolean> {
      * @param o
      */
     @Override
-    protected void onPostExecute(Boolean o) {
-        if (o) {
-            this.loginActivity.runingActivity(user.getEmail(), user.getPassword(),
-                    user.getToken(), user.getToken_refresh());
-            executeRefresh(user.getEmail(), user.getPassword(),
-                    user.getToken(), user.getToken_refresh());
-        } else {
-            if (!loginSucces && internetConnection) {
-                this.loginActivity.setAlertText("Error de Logueo!", "Mail y Contraseña no validos.");
-            }
-            if (!internetConnection) {
-                this.loginActivity.setAlertText("Error de conexion!", "Debe conectarse a internet e intentar nuevamente");
-            }
-            this.loginActivity.btnLogin.setEnabled(true);
-            this.loginActivity.btnRegister.setEnabled(true);
+    protected void onPostExecute(Boolean o){
+        if(o)
+
+    {
+        this.loginActivity.lanzarActivity(user.getEmail(), user.getPassword(),
+                user.getToken(), user.getToken_refresh());
+        executeRefresh(user.getEmail(), user.getPassword(),
+                user.getToken(), user.getToken_refresh());
+    } else
+
+    {
+        if (!loginSucces && internetConnection) {
+            this.loginActivity.setAlertText("Error de Logueo!", serverResponse);
         }
+        if (!internetConnection) {
+            this.loginActivity.setAlertText("Error de conexion!", "Debe conectarse a internet e intentar nuevamente");
+        }
+        this.loginActivity.progressBar.setVisibility(View.INVISIBLE);
+        this.loginActivity.btnLogin.setEnabled(true);
+        this.loginActivity.btnRegister.setEnabled(true);
     }
+
+}
 
     private void executeRefresh(String... strings) {
         User user = new User(strings[0], strings[1], strings[2], strings[3]);

@@ -48,12 +48,18 @@
     <string name="button_menu_auto_test">Auto diagnostoco</string>
     <string name="button_menu_logout">Cerrar Sesión</string>
 
-    <string name="alertCovid">Usted podría ser un caso confirmado por criterio clínico-epidemiológico.
+    <string name="alertCovid_1">Usted podría ser un caso confirmado por criterio clínico-epidemiológico.
 Debe permanecer en su casa, en una habitación sólo para usted. La habitación debe estar con la puerta cerrada. Puede salir solo al baño, con el barbijo y después limpiar el baño.
-Reforzar la limpieza de las superficies y el lavado de manos de todos los convivientes, con agua y jabón es suficiente. Ventilar la casa. Si necesita que le alcancen algo, en lo posible que lo haga la misma persona y que sea una persona joven y sana.
-Si tiene Obra Social comuníquese, de lo contrario será contactado desde el Ministerio de Salud PBA para ser evaluado.
-Sus convivientes y las personas que estuvieron en contacto con usted (a menos de 2 mts por más de 15 min) las 48 hs previas al inicio de síntomas deberán aislarse durante 10 días. Si alguno de ellos presenta algunos de los síntomas nombrados que llame a su OOSS y sino al 148. Le pido que les comunique eso.
-Debe activar el sistema de emergencias, llamando al 107 o al número de emergencias de su OOSS: si tiene dificultad respiratoria mayor como por ej. Palabra entrecortada o respira rápido y fuerte en reposo, cambio de color de piel (azulada), sensación de ahogo.</string>
+Reforzar la limpieza de las superficies y el lavado de manos de todos los convivientes, con agua y jabón es suficiente. Ventilar la casa. Si necesita que le alcancen algo, en lo posible que lo haga la misma persona y que sea una persona joven y sana..</string>
+    <string name="alertCovid_2">Si tiene Obra Social comuníquese, de lo contrario será contactado desde el Ministerio de Salud PBA para ser evaluado.</string>
+    />
+    <string name="alertCovid_3">
+Sus convivientes y las personas que estuvieron en contacto con usted (a menos de 2 mts por más de 15 min) las 48 hs previas al inicio de síntomas deberán aislarse durante 10 días. Si alguno de ellos presenta algunos de los síntomas nombrados que llame a su OOSS y sino al 148. Le pido que les comunique eso.</string>
+    />
+    <string name="alertCovid_4">
+Debe activar el sistema de emergencias, llamando al 107 o al número de emergencias de su OOSS: si tiene dificultad respiratoria mayor como por ej. Palabra entrecortada o respira rápido y fuerte en reposo, cambio de color de piel (azulada), sensación de ahogo</string>
+    />
+    <string name="alertCovid_5"></string>/>
     <string name="etiq_steps">Cantidad de Pasos realizado</string>
     <string name="etiq_speed">Velocidad</string>
     <string name="etiq_active_time">Tiempo Activo</string>

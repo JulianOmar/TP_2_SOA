@@ -23,6 +23,9 @@ public class MainActivity extends AppCompatActivity {
     private Button btnSend;
     private EditText telephoneNumber;
     private AlertDialog alertDialog;
+    private float batteryPct;
+    private ImageView imageViewBattery;
+    private TextView tvBatteryLevel;
 
     /**
      * Creación de la Activity Main
@@ -32,12 +35,26 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.i("AppInfo", "<<<<ON_CREATE MAIN_ACTIVITY>>>>");
         setContentView(R.layout.activity_main);
         btnSend = (Button) findViewById(R.id.btnSendCode);
         telephoneNumber = (EditText) findViewById(R.id.editTextTelephoneNumber);
         alertDialog = new AlertDialog.Builder(MainActivity.this).create();
 
-
+        IntentFilter ifilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
+        Intent batteryStatus = MainActivity.this.registerReceiver(null, ifilter);
+        int level = batteryStatus.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
+        int scale = batteryStatus.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
+        int status = batteryStatus.getIntExtra(BatteryManager.EXTRA_STATUS, -1);
+        batteryPct = level * 100 / (float) scale;
+        tvBatteryLevel = (TextView) findViewById(R.id.textViewBatteryLevel);
+        tvBatteryLevel.setText(String.valueOf(batteryPct));
+        boolean isCharging = status == BatteryManager.BATTERY_STATUS_CHARGING ||
+                status == BatteryManager.BATTERY_STATUS_FULL;
+        imageViewBattery = (ImageView) findViewById(R.id.imageViewBattery);
+        if (isCharging) {
+            imageViewBattery.setImageResource(R.drawable.ic_battery_charging_90_black_48dp);
+        }
     }
 
     @Override
@@ -77,7 +94,6 @@ public class MainActivity extends AppCompatActivity {
      */
     public void onClickSendCode(View view) {
         Intent intent;
-        Log.i("debug59", "Ingreso a onclicSendSode");
         if (telephoneNumber.getText().toString().length() != 10) {
             setAlertText("Error!", "Ingrese un número de telefono valido.");
         } else if (telephoneNumber.getText().toString().matches("")) {
@@ -91,7 +107,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     *
      * @param title
      * @param message
      */

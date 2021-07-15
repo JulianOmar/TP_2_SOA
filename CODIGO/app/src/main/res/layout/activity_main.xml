@@ -7,21 +7,39 @@
     tools:context=".MainActivity">
 
     <TextView
+        android:id="@+id/textViewBatteryLevel"
+        android:layout_width="61dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="BL"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageViewBattery"
+        android:layout_width="20dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toStartOf="@+id/textViewBatteryLevel"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_battery_90_black_48dp" />
+
+    <TextView
         android:id="@+id/textView9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="110dp"
-        android:layout_marginLeft="110dp"
         android:layout_marginTop="184dp"
         android:layout_marginEnd="110dp"
-        android:layout_marginRight="110dp"
         android:layout_marginBottom="528dp"
         android:text="@string/tag_telephone_number"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:textSize="@dimen/textFormSize"/>
+        tools:textSize="@dimen/textFormSize" />
 
     <EditText
         android:id="@+id/editTextTelephoneNumber"

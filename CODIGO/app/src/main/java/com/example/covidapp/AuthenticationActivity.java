@@ -29,8 +29,8 @@ public class AuthenticationActivity extends AppCompatActivity {
     private AlertDialog alertDialog;
 
     /**
-     * Creacion de la Activity Authentication
-     * Generacionde un numero random para autenticación
+     * Creación de la Activity Authentication
+     * Generación de un numero random para autenticación
      *
      * @param savedInstanceState
      */
@@ -48,6 +48,7 @@ public class AuthenticationActivity extends AppCompatActivity {
         Intent intentL2 = getIntent();
         Bundle extras = intentL2.getExtras();
         number = (String) extras.get("numeroTelefono");
+        random = (int) (Math.random() * 10000);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (checkSelfPermission(Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED) {
                 sendSMS(number);
@@ -60,9 +61,10 @@ public class AuthenticationActivity extends AppCompatActivity {
     /**
      * Envia el codigo de validación
      *
-     * @param number
+     * @param number2
      */
-    private void sendSMS(String number) {
+    private void sendSMS(String number2) {
+        String number = number2;
         random = (int) (Math.random() * 10000);
         String message = "Su codigo de verificacion es:" + random.toString();
         try {
@@ -124,6 +126,7 @@ public class AuthenticationActivity extends AppCompatActivity {
             }
         }
     }
+
     public void setAlertText(String title, String message) {
         alertDialog.setTitle(title);
         alertDialog.setMessage(message);
@@ -135,6 +138,7 @@ public class AuthenticationActivity extends AppCompatActivity {
                 });
         alertDialog.show();
     }
+
     /**
      * Retorno a la vistia inicial
      *
@@ -147,12 +151,21 @@ public class AuthenticationActivity extends AppCompatActivity {
         finish();
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(AuthenticationActivity.this, MainActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
     /**
      * Reenvio del mensaje
+     *
      * @param view
      */
     public void onClickSendCode(View view) {
         sendSMS(number);
     }
+
 
 }
